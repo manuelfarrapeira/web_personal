@@ -14,7 +14,7 @@ export default function Home() {
       <div className="mx-auto max-w-6xl pt-20">
         <ProfileHeader />
 
-        <main className="px-6 py-4 space-y-12 md:px-8 lg:px-12 pb-270">
+        <main className="px-6 py-8 space-y-14 md:px-8 lg:px-12 pb-4">
           <div id="about">
             <AboutSection />
           </div>

@@ -1,5 +1,3 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Mail, Phone, Linkedin, Github } from "lucide-react"
 
 const contactInfo = [
@@ -8,69 +6,78 @@ const contactInfo = [
     label: "Email",
     value: "mfarrapeira@hotmail.com",
     href: "mailto:mfarrapeira@hotmail.com",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    accent: "text-primary",
+    bg: "bg-primary/10",
+    hoverBorder: "hover:border-primary/30",
   },
   {
     icon: Phone,
     label: "Teléfono",
     value: "653 800 845",
-    color: "text-accent",
-    bgColor: "bg-accent/10",
+    href: undefined,
+    accent: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-emerald-500/10",
+    hoverBorder: "hover:border-emerald-500/30",
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
     value: "Manuel Farrapeira Pérez",
     href: "https://www.linkedin.com/in/manuel-farrapeira-pérez-a2b01891/",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    accent: "text-sky-600 dark:text-sky-400",
+    bg: "bg-sky-500/10",
+    hoverBorder: "hover:border-sky-500/30",
   },
   {
     icon: Github,
     label: "GitHub",
     value: "@manuelfarrapeira",
     href: "https://github.com/manuelfarrapeira?tab=repositories",
-    color: "text-chart-3",
-    bgColor: "bg-chart-3/10",
+    accent: "text-foreground",
+    bg: "bg-secondary",
+    hoverBorder: "hover:border-foreground/20",
   },
 ]
 
 export function ContactSection() {
   return (
-    <section className="pb-12">
-      <h2 className="text-3xl font-bold tracking-tight mb-6 text-foreground">Contacto</h2>
+    <section className="pb-16">
+      <div className="section-heading">
+        <div className="section-icon">
+          <Mail className="h-5 w-5 text-primary" />
+        </div>
+        <h2 className="section-title">Contacto</h2>
+      </div>
 
-      <Card className="p-8 shadow-sm hover:shadow-md transition-all border-l-4 border-l-accent/60">
-        <p className="text-foreground/80 leading-relaxed mb-8 text-lg">
-          ¿Tienes un proyecto en mente o quieres charlar? No dudes en contactarme a través de cualquiera de estos
-          canales:
+      <div className="card-elegant p-7 md:p-8">
+        <p className="text-foreground/75 leading-relaxed mb-8 text-[1.05rem]">
+          ¿Tienes un proyecto en mente o quieres charlar? No dudes en contactarme a través de cualquiera de estos canales:
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           {contactInfo.map((contact) => {
             const Icon = contact.icon
+            const Wrapper = contact.href ? "a" : "div"
             return (
-              <Button
+              <Wrapper
                 key={contact.label}
-                variant="outline"
-                className="justify-start h-auto py-4 px-5 hover:bg-secondary/80 hover:border-primary/30 transition-all hover:shadow-sm bg-transparent"
-                asChild
+                {...(contact.href ? { href: contact.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+                className={`group flex items-center gap-4 p-4 rounded-xl border border-border/60 bg-background/50
+                  transition-all duration-200 hover:shadow-sm ${contact.hoverBorder}
+                  ${contact.href ? "cursor-pointer" : ""}`}
               >
-                <a href={contact.href} target="_blank" rel="noopener noreferrer">
-                  <div className={`mr-4 p-2.5 rounded-xl ${contact.bgColor} shadow-sm`}>
-                    <Icon className={`h-5 w-5 ${contact.color}`} />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-xs text-muted-foreground font-medium">{contact.label}</p>
-                    <p className="text-sm font-medium text-foreground mt-0.5">{contact.value}</p>
-                  </div>
-                </a>
-              </Button>
+                <div className={`p-3 rounded-xl ${contact.bg} shrink-0 transition-transform duration-200 group-hover:scale-110`}>
+                  <Icon className={`h-5 w-5 ${contact.accent}`} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">{contact.label}</p>
+                  <p className="text-sm font-semibold text-foreground mt-0.5 truncate">{contact.value}</p>
+                </div>
+              </Wrapper>
             )
           })}
         </div>
-      </Card>
+      </div>
     </section>
   )
 }

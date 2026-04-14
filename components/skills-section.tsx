@@ -1,99 +1,111 @@
-import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {Code2, Database, Wrench, Users, User} from "lucide-react"
+import { Code2, Database, Wrench, Users, Cloud, MessageSquare, Monitor, Settings2 } from "lucide-react"
 
 const skillCategories = [
   {
     title: "Backend & Java",
     icon: Code2,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    accent: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/15",
     skills: ["Java", "Spring Boot", "Spring Framework", "J2EE", "Hibernate", "JUnit", "Web Services", "Java FX"],
   },
   {
     title: "Cloud & DevOps",
-    icon: Database,
-    color: "text-accent",
-    bgColor: "bg-accent/10",
+    icon: Cloud,
+    accent: "text-sky-600 dark:text-sky-400",
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/15",
     skills: ["Google Cloud (GCP)", "Kubernetes", "Docker", "Openshift", "ArgoCD", "Helm", "GitHub", "Git"],
   },
   {
     title: "Bases de Datos",
     icon: Database,
-    color: "text-chart-3",
-    bgColor: "bg-chart-3/10",
-    skills: ["MongoDB", "Oracle Database", "MySQL", "DB2","MariaDB", "Redis"],
+    accent: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/15",
+    skills: ["MongoDB", "Oracle Database", "MySQL", "DB2", "MariaDB", "Redis"],
   },
   {
     title: "Mensajería & APIs",
-    icon: Wrench,
-    color: "text-accent",
-    bgColor: "bg-accent/10",
+    icon: MessageSquare,
+    accent: "text-accent",
+    bg: "bg-accent/10",
+    border: "border-accent/15",
     skills: ["Apache Kafka", "Colas", "Protobuf", "REST APIs"],
   },
   {
     title: "Monitoreo & Calidad",
-    icon: Wrench,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+    icon: Monitor,
+    accent: "text-violet-600 dark:text-violet-400",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/15",
     skills: ["Grafana", "SonarQube", "JIRA"],
   },
   {
     title: "Otros Lenguajes",
     icon: Code2,
-    color: "text-chart-3",
-    bgColor: "bg-chart-3/10",
+    accent: "text-rose-600 dark:text-rose-400",
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/15",
     skills: ["PHP", "C#", "SQL", "XML", "JSON"],
   },
   {
     title: "Herramientas & IDEs",
-    icon: Wrench,
-    color: "text-chart-2",
-    bgColor: "bg-chart-2/10",
+    icon: Settings2,
+    accent: "text-amber-600 dark:text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/15",
     skills: ["IntelliJ IDEA", "Eclipse", "Android Studio", "Visual Studio", "PhpStorm"],
   },
   {
     title: "Sistemas & Otros",
     icon: Users,
-    color: "text-accent",
-    bgColor: "bg-accent/10",
+    accent: "text-teal-600 dark:text-teal-400",
+    bg: "bg-teal-500/10",
+    border: "border-teal-500/15",
     skills: ["Linux", "Apache", "Android", "Scrum", "CMS", "Firmas digitales", "Certificaciones SSL"],
   },
 ]
 
 export function SkillsSection() {
   return (
-    <section className="mb-12">
-
-      <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 rounded-lg bg-primary/10">
-          <Code2 className="h-6 w-6 text-primary"/>
+    <section>
+      <div className="section-heading">
+        <div className="section-icon">
+          <Wrench className="h-5 w-5 text-primary" />
         </div>
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">Habilidades</h2>
+        <h2 className="section-title">Habilidades</h2>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
+
+      <div className="grid gap-4 md:grid-cols-2">
         {skillCategories.map((category) => {
           const Icon = category.icon
           return (
-            <Card key={category.title} className="p-8 shadow-sm hover:shadow-md transition-all hover:border-primary/20">
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`p-3 rounded-xl ${category.bgColor} shadow-sm`}>
-                  <Icon className={`h-6 w-6 ${category.color}`} />
+            <div
+              key={category.title}
+              className={`card-elegant p-6 border ${category.border}`}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`p-2.5 rounded-xl ${category.bg}`}>
+                  <Icon className={`h-5 w-5 ${category.accent}`} />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground">{category.title}</h3>
+                <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                  {category.title}
+                </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {category.skills.map((skill) => (
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="text-sm font-medium px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                    className="text-xs font-medium px-2.5 py-1 rounded-full hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
                   >
                     {skill}
                   </Badge>
                 ))}
               </div>
-            </Card>
+            </div>
           )
         })}
       </div>
